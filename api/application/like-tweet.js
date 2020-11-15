@@ -1,5 +1,5 @@
 const LikeTweetUsecase = require('_usecases/like-tweet')
-const inMemoryTweetRepository = require('_adapters/in-memory-tweet-repository')
+const TweetRepository = require('_adapters/mongodb-tweet-repository')
 const { toApplication } = require('./translators/tweet-translator')
 
 const tweetLiked = ctx => tweet => {
@@ -7,10 +7,9 @@ const tweetLiked = ctx => tweet => {
   ctx.body = tweet
 }
 
-const LikeTweet = (_infrastructure) => {
-  const likeTweetUsecase = LikeTweetUsecase({
-    tweetRepository: inMemoryTweetRepository,
-  })
+const LikeTweet = ({ mongoDb }) => {
+  const tweetRepository = TweetRepository({ mongoDb })
+  const likeTweetUsecase = LikeTweetUsecase({ tweetRepository })
 
   const like = ctx =>
     likeTweetUsecase
