@@ -3,15 +3,15 @@ const HttpServer = require('./server')
 const config = require('_config')
 const logger = require('_infrastructure/logger')
 
-// TODO: import infrastructure connectors and config
+const mongodb = require('_infrastructure/mongodb')
 
-const connectInfrastructure = _config =>
+const connectInfrastructure = () =>
   Promise
     .all([
-      // TODO: connect to external infrastructure elements
+      mongodb.connect(),
     ])
-    .then(([]) => ({
-      // TODO: return connected clients as a single dependency object
+    .then(([mongoDb]) => ({
+      mongoDb,
     }))
 
 const startServer = infrastructure =>

@@ -2,20 +2,29 @@ const supertest = require('supertest')
 
 const config = require('_config')
 const app = require('_server/app')
+const mongoClient = require('_infrastructure/mongodb')
+
+const { cleanDataBase } = require('./utils')
 
 let _server
 let _api
+let _mongoDb
 
 before(async () => {
-  // TODO: connect infrastructure
-  const infrastructure = {}
-  _server = app(infrastructure).listen(config.api.port)
+  _mongoDb = await mongoClient.connect()
+  _server = app({ mongoDb: _mongoDb }).listen(config.api.port)
   _api = supertest(_server)
 })
 
 after(async () => {
-  // TODO: disconnect infrastructure
-  _server.close()
+  await mongoClient.close()
+  await _server.close()
+})
+
+afterEach(async () => {
+  if (_mongoDb) {
+    await cleanDataBase(_mongoDb)
+  }
 })
 
 /**
