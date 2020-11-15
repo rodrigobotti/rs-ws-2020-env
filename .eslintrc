@@ -1,0 +1,38 @@
+{
+  "extends": [ "standard" ],
+  "plugins": [ "json" ],
+  "rules": {
+    "complexity": ["error", 5],
+    "eqeqeq": "error",
+    "max-statements": [ "error", { "max": 15 } ],
+    "comma-dangle": ["error", {
+      "arrays": "always-multiline",
+      "objects": "always-multiline",
+      "imports": "always-multiline",
+      "exports": "always",
+      "functions": "never"
+    }]
+  },
+  "overrides": [
+    {
+      "files": [
+        "*.spec.js",
+        "tests/**/*.js"
+      ],
+      "rules": {
+        "no-unused-expressions": 0
+      },
+      "globals": {
+        "it": true,
+        "describe": true,
+        "expect": true,
+        "sinon": true,
+        "before": true,
+        "beforeEach": true,
+        "after": true,
+        "afterEach": true,
+        "context": true
+      }
+    }
+  ]
+}
