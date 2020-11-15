@@ -15,7 +15,11 @@ const cleanDataBase = mongoDb =>
     .collections()
     .then(deleteCollections)
 
+const cleanCache = redis =>
+  redis.flushdb()
+
 module.exports = {
   ...commons,
   cleanDataBase,
+  cleanCache,
 }

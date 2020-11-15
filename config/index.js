@@ -19,4 +19,10 @@ module.exports = {
       poolSize: parseInt(process.env.MONGODB_POOL_SIZE || 10),
     },
   },
+  redis: {
+    host: process.env.REDIS_HOST,
+    port: parseInt(process.env.REDIS_PORT),
+    db: parseInt(process.env.REDIS_DB),
+    keyPrefix: process.env.REDIS_KEY_PREFIX || `${process.env.NODE_ENV}:`,
+  },
 }
