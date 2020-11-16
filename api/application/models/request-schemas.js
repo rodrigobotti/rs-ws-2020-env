@@ -3,7 +3,7 @@ const createTweet = {
     in: 'body',
     notEmpty: true,
     isLength: {
-      options: [{ min: 1, max: 140 }]
+      options: [{ min: 1, max: 140 }],
     },
   },
 }
