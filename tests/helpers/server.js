@@ -3,29 +3,35 @@ const supertest = require('supertest')
 const config = require('_config')
 const app = require('_server/app')
 const mongoClient = require('_infrastructure/mongodb')
+const redisClient = require('_infrastructure/redis')
 
-const { cleanDataBase } = require('./utils')
+const { cleanDataBase, cleanCache } = require('./utils')
 
 let _server
 let _api
 let _mongoDb
+let _redis
 
 before(async () => {
-  _mongoDb = await mongoClient.connect()
-  _server = app({ mongoDb: _mongoDb }).listen(config.api.port)
+  [_mongoDb, _redis] = await Promise.all([mongoClient.connect(), redisClient.connect()])
+  _server = app({ mongoDb: _mongoDb, redis: _redis }).listen(config.api.port)
   _api = supertest(_server)
 })
 
-after(async () => {
-  await mongoClient.close()
-  await _server.close()
-})
+after(() =>
+  Promise.all([
+    mongoClient.close(),
+    redisClient.close(),
+    _server.close(),
+  ])
+)
 
-afterEach(async () => {
-  if (_mongoDb) {
-    await cleanDataBase(_mongoDb)
-  }
-})
+afterEach(() =>
+  Promise.all([
+    (_mongoDb && cleanDataBase(_mongoDb)),
+    (_redis && cleanCache(_redis)),
+  ])
+)
 
 /**
  * Supertest instance connected to the application server.

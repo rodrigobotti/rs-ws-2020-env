@@ -1,3 +1,5 @@
+const R = require('ramda')
+
 const { Tweet } = require('_domain/tweet')
 
 /**
@@ -13,7 +15,10 @@ const toApplication = ({ id, text, likes: { amount } }) => ({
   likes: amount,
 })
 
+const toApplicationList = R.map(toApplication)
+
 module.exports = {
   toDomainModel,
   toApplication,
+  toApplicationList,
 }

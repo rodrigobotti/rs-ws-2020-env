@@ -41,9 +41,20 @@ const TweetRepository = ({ mongoDb }) => {
       .then(getUpdatedDocument)
       .then(decodeTweet)
 
+  const orderBy = (field, limit, ascending = false) =>
+    mongoDb
+      .collection('tweet')
+      .find()
+      .limit(limit)
+      .sort({ [field]: ascending ? 1 : -1 })
+      .toArray()
+      .then(R.map(decodeTweet))
+
   return {
     add,
     increment,
+    orderBy,
+    encodeTweet,
   }
 }
 
