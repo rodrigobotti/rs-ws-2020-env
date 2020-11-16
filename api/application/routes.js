@@ -10,6 +10,7 @@ const schemas = require('./models/request-schemas')
 // application
 const CreateTweet = require('./create-tweet')
 const LikeTweet = require('./like-tweet')
+const TopLikedTweets = require('./top-liked-tweets')
 
 const Routes = infrastructure => {
   const router = new Router()
@@ -19,9 +20,11 @@ const Routes = infrastructure => {
 
   const createTweet = CreateTweet(infrastructure)
   const likeTweet = LikeTweet(infrastructure)
+  const topLikedTweets = TopLikedTweets(infrastructure)
 
   router.post('/tweets', validate(schemas.createTweet), createTweet.create)
   router.put('/tweets/:id/likes', validate(schemas.likeTweet), likeTweet.like)
+  router.get('/tweets', topLikedTweets.topLiked)
 
   return router
 }

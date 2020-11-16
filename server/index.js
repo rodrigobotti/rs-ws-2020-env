@@ -4,14 +4,17 @@ const config = require('_config')
 const logger = require('_infrastructure/logger')
 
 const mongodb = require('_infrastructure/mongodb')
+const redisClient = require('_infrastructure/redis')
 
 const connectInfrastructure = () =>
   Promise
     .all([
       mongodb.connect(),
+      redisClient.connect(),
     ])
-    .then(([mongoDb]) => ({
+    .then(([mongoDb, redis]) => ({
       mongoDb,
+      redis,
     }))
 
 const startServer = infrastructure =>

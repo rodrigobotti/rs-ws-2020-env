@@ -1,3 +1,4 @@
+const R = require('ramda')
 const faker = require('faker')
 const uuid = require('uuid')
 
@@ -70,6 +71,63 @@ describe('mongodb-tweet-repository test', () => {
         expect(result.some.random.field).to.equal(currentFieldValue + 1)
         const updatedDocument = await mongoDb.collection('tweet').findOne({ _id: id })
         expect(updatedDocument.some.random.field).to.equal(currentFieldValue + 1)
+      })
+    })
+  })
+  describe('#orderBy test', () => {
+    const randomInt = (min, max) => faker.random.number({
+      min,
+      max,
+      precision: 1,
+    })
+    const createTweet = () => Tweet({
+      text: faker.lorem.sentence(),
+      likes: randomInt(1, 200),
+    })
+    const createTweets = R.pipe(
+      R.times(createTweet),
+      R.uniqBy(R.path(['likes', 'amount']))
+    )
+
+    const insertTweets = (repository, tweets) =>
+      mongoDb
+        .collection('tweet')
+        .insertMany(R.map(repository.encodeTweet, tweets))
+
+    const ascending = (fieldPath, limit) => R.pipe(
+      R.sort(R.ascend(R.path(fieldPath))),
+      R.take(limit)
+    )
+    const descending = (fieldPath, limit) => R.pipe(
+      R.sort(R.descend(R.path(fieldPath))),
+      R.take(limit)
+    )
+    context('When ascending is true', () => {
+      it('Sorts documents by field ascending and limits the result', async () => {
+        const repository = Repository({ mongoDb })
+        const totalDocuments = randomInt(10, 20)
+        const limit = Math.floor(totalDocuments / 2)
+        const registeredTweets = createTweets(totalDocuments)
+        const expectedTweets = ascending(['likes', 'amount'], limit)(registeredTweets)
+        await insertTweets(repository, registeredTweets)
+
+        const result = await repository.orderBy('likes.amount', limit, true)
+
+        expect(result).to.deep.equal(expectedTweets)
+      })
+    })
+    context('When descending is true', () => {
+      it('Sorts documents by field descending and limits the result', async () => {
+        const repository = Repository({ mongoDb })
+        const totalDocuments = randomInt(10, 20)
+        const limit = Math.floor(totalDocuments / 2)
+        const registeredTweets = createTweets(totalDocuments)
+        const expectedTweets = descending(['likes', 'amount'], limit)(registeredTweets)
+        await insertTweets(repository, registeredTweets)
+
+        const result = await repository.orderBy('likes.amount', limit)
+
+        expect(result).to.deep.equal(expectedTweets)
       })
     })
   })
