@@ -1,3 +1,5 @@
+![Check](https://github.com/rodrigobotti/rs-ws-2020-env/workflows/Check/badge.svg)
+
 # RocketSeat Workshop 2020 - Ambiente containerizado
 
 Nesse workshop vamos aprender a utilizar [Docker](https://www.docker.com/) e [docker-compose](https://docs.docker.com/compose/)
