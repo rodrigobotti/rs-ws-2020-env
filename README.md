@@ -1,6 +1,7 @@
 <img src="https://storage.googleapis.com/golden-wind/experts-club/capa-github.svg" />
 
 # Containerizando o ambiente com docker-compose
+![Check](https://github.com/rodrigobotti/rs-ws-2020-env/workflows/Check/badge.svg)
 
 Nesse workshop vamos aprender a utilizar containers para criar dependências de infra-estrutura das nossas aplicações (como bancos de dados, serviços de cache).
 
