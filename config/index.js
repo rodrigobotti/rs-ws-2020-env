@@ -13,7 +13,6 @@ module.exports = {
     url: process.env.MONGODB_URL,
     database: process.env.MONGODB_DATABASE,
     connectionOptions: {
-      useCreateIndex: true,
       useNewUrlParser: true,
       useUnifiedTopology: true,
       poolSize: parseInt(process.env.MONGODB_POOL_SIZE || 10),

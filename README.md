@@ -1,5 +1,3 @@
-![Check](https://github.com/rodrigobotti/rs-ws-2020-env/workflows/Check/badge.svg)
-
 # RocketSeat Workshop 2020 - Ambiente containerizado
 
 Nesse workshop vamos aprender a utilizar [Docker](https://www.docker.com/) e [docker-compose](https://docs.docker.com/compose/)
@@ -33,19 +31,27 @@ O workshop será dividido nas seguintes etapas:
 
 2. Adição de bancos de dados [MongoDB](https://www.mongodb.com/)
     - Como utilizar o _docker-compose_ para "subir" o banco localmente (desenvolvimento local, testes automatizados)
-    - Refatorar o código para utilizar o banco de dados ao invés do banco em memória
+        - utilizando rede virtual
+        - expondo na máquina host
 
 3. Adição de serviço de cache [Redis](https://redis.io/)
     - Como utilizar o _docker-compose_ para "subir" o serviço de cache localmente (desenvolvimento local, testes automatizados)
-    - Criar a funcionalidade de "top 5 _tweets_ com mais _likes_" utilizando o cache
+        - Utilizando rede virtual
+        - expondo na máquina host
 
-4. Criar _pipeline_ de _CI_ com [Github Actions](https://github.com/features/actions)
+4. Conectando a aplicação
+    - Testes
+    - Desenvolvimento
+        - Como utilizar o _docker-compose_ para "subir" a aplicação localmente conectando com os recursos
+        - Expondo na máquina host
+
+5. Criar _pipeline_ de _CI_ com [Github Actions](https://github.com/features/actions)
     - Com etapa de testes de integração
     - **importante**: o foco não é aprender _github actions_ mas sim como utilizar containers pra facilitar o processo
 
-5. Considerações finais
+6. Considerações finais
 
-6. Q&A
+7. Q&A
 
 ## Pré-requisitos
 
@@ -72,11 +78,13 @@ Para conseguir acompanhar o workshop será necessário ter no ambiente
   npm install
   npm run postinstall
 
-  # verificar que deu certo:
+  # verificar:
   
   # executar testes unitários e de integração
+  # como falta o mongodb e o redis, deve falhar com timeout de conexão
   npm test
 
   # tentar subir a aplicação localmente em modo debug
+  # como falta o mongodb e o redis, deve falhar por erro de conexão
   npm run start:dev # gerará uma linha de log com "Application started successfully in port 3000"
   ```
