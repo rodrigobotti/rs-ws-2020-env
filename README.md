@@ -88,3 +88,43 @@ Para conseguir acompanhar o workshop será necessário ter no ambiente
   # como falta o mongodb e o redis, deve falhar por erro de conexão
   npm run start:dev # gerará uma linha de log com "Application started successfully in port 3000"
   ```
+
+## Pós workshop
+
+### Código produzido
+Todo código produzido nesse workshop está disponível no branch `cheat-sheet`.
+
+### Lição de casa
+
+Durante o workshop, eu "expliquei" (nem sei se pode chamar disso) de forma bem grosseira o que é um container.
+Recomendo [consultar a fonte](https://www.docker.com/resources/what-container) pra saber de fato o que são e a tecnologia de fato por trás.
+
+Além disso, a parte de networking foi explicada no modo "vamos acreditar que funciona" e foram utilizadas abordagens específicas.
+Recomendo a leitura da [documentação oficial](https://www.docker.com/resources/what-container) para esse assunto,
+tanto para entender os detalhes quanto para entender todo o leque de opções desse assunto vasto.
+
+#### Exercícios
+
+**Disclaimer**: originalmente o workshop tinha sido feito para que construíssemos features da aplicação ao mesmo tempo que integrassemos com containers.
+Primeiro implementaríamos as features de _criação_ e _adicionar likes_ e finalmente a de _top com mais likes_ junto com seus respectivos testes.
+TL;DR: originalmente, produziríamos código de aplicação no workshop também.
+
+Caso você queira mexer um pouco na aplicação, você pode implementar os seguintes exercícios:
+
+1 . Criar testes que estão faltando 
+
+1.1 . Unitários para os componentes da funcionalidade _adicionar likes_
+
+1.2 . De integração para a funcionalidade de _adicionar likes_
+
+1.3 . De integração para a funcionalidade de _top tweets com mais likes_
+
+2 . No pipeline de CI, testar com check de cobertura de código
+
+3 . Criar `Makefile` para agrupar tarefas utilizando `make`
+
+3.1 . Task `test`: cria infraestrutura + executa testes com check de cobertura + derruba a infraestrutura
+
+3.2 . Task `run`: cria infraestrura + inicia a aplicação
+
+3.3 . Modificar o pipeline de CI para utilizar a task `test`
