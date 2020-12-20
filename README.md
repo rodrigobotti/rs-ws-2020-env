@@ -12,22 +12,12 @@ Vamos ver que com o uso dessas ferramentas ganharemos:
 - Não precisar compartilhar essas dependências entre colaboradores
 - Não precisar se preocupar com o ciclo de vida dessas dependências (considerá-las efêmeras)
 
-## A aplicação
-
-A aplicação consiste de uma API REST em [Node.JS](https://nodejs.org/en/).
-
-Essa API será um serviço que gerencia posts de texto do tipo `tweet` (inspirado no [twitter](https://twitter.com/)):
-- Criação de um _tweet_ que será identificado por um [uuid](https://en.wikipedia.org/wiki/Universally_unique_identifier) versão 4
-- Acrescentar _likes_ nos _tweets_ cadastrados
-- Listar os top _tweets_ com mais _likes_
-
-### O Workshop
+## O Workshop
 
 O workshop será dividido nas seguintes etapas:
 
 1. Apresentação da aplicação
     - familiarização com o código fonte, arquitetura de software, testes
-    - funcionalidades utilizam banco de dados em memória
 
 2. Adição de bancos de dados [MongoDB](https://www.mongodb.com/)
     - Como utilizar o _docker-compose_ para "subir" o banco localmente (desenvolvimento local, testes automatizados)
@@ -53,6 +43,15 @@ O workshop será dividido nas seguintes etapas:
 
 7. Q&A
 
+### A aplicação
+
+A aplicação consiste de uma API REST em [Node.JS](https://nodejs.org/en/).
+
+Essa API será um serviço que gerencia posts de texto do tipo `tweet` (inspirado no [twitter](https://twitter.com/)):
+- Criação de um _tweet_ que será identificado por um [uuid](https://en.wikipedia.org/wiki/Universally_unique_identifier) versão 4
+- Acrescentar _likes_ nos _tweets_ cadastrados
+- Listar os top _tweets_ com mais _likes_
+
 ## Pré-requisitos
 
 **Disclaimer**: O setup não foi testado em sistema operacional _Windows_ então pode ser que não funcione.
@@ -76,7 +75,6 @@ Para conseguir acompanhar o workshop será necessário ter no ambiente
 
   # instalar as dependências
   npm install
-  npm run postinstall
 
   # verificar:
   
@@ -86,7 +84,7 @@ Para conseguir acompanhar o workshop será necessário ter no ambiente
 
   # tentar subir a aplicação localmente em modo debug
   # como falta o mongodb e o redis, deve falhar por erro de conexão
-  npm run start:dev # gerará uma linha de log com "Application started successfully in port 3000"
+  npm run start:dev
   ```
 
 ## Pós workshop
