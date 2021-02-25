@@ -1,10 +1,14 @@
-# RocketSeat Workshop 2020 - Ambiente containerizado
+<img src="https://storage.googleapis.com/golden-wind/experts-club/capa-github.svg" />
 
-Nesse workshop vamos aprender a utilizar [Docker](https://www.docker.com/) e [docker-compose](https://docs.docker.com/compose/)
-para criar um ambiente de desenvolvimento containerizado.
+# Containerizando o ambiente com docker-compose
 
-Isso será feito com o objetivo de facilitar o desenvolvimento, testes automatizados e integração contínua de aplicações
-que dependem de serviços de infraestrutura externos - como bancos de dados e cache.
+Nesse workshop vamos aprender a utilizar containers para criar dependências de infra-estrutura das nossas aplicações (como bancos de dados, serviços de cache).
+
+Utilizaremos [Docker](https://www.docker.com/) como nossa ferramenta de containerização e utilizaremos o [docker-compose](https://docs.docker.com/compose/) para orquestrar o ciclo de vida de nossos containers.
+
+Aprenderemos algumas abordagens para conectar nossa aplicação localmente tanto para executá-la quanto para rodar testes integrados.
+
+No final utilizaremos essas tecnologias também para criação de um pipeline de integração contínua.
 
 Vamos ver que com o uso dessas ferramentas ganharemos:
 - Não precisar instalar essas dependências em nosso ambiente local
@@ -126,3 +130,9 @@ Caso você queira mexer um pouco na aplicação, você pode implementar os segui
 3.2 . Task `run`: cria infraestrura + inicia a aplicação
 
 3.3 . Modificar o pipeline de CI para utilizar a task `test`
+
+## Expert
+
+| [<img src="https://avatars.githubusercontent.com/u/5365992?v=4" width="75px">](https://github.com/rodrigobotti) |
+| :-: |
+| [Rodrigo Botti](https://github.com/rodrigobotti) |
